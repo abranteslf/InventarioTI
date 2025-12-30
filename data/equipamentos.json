@@ -16,5 +16,23 @@
         "status": "Disponivel",
         "capacidadeStorageTB": 1,
         "qtdBaias": 4
+    },
+    {
+        "id": 3,
+        "tipo": "Notebook",
+        "marca": "Positivo",
+        "modelo": "Ultra",
+        "status": "Baixado",
+        "processador": "Intel Celeron",
+        "ram": 2
+    },
+    {
+        "id": 4,
+        "tipo": "Servidor",
+        "marca": "IBM",
+        "modelo": "SK2",
+        "status": "Disponivel",
+        "capacidadeStorageTB": 8,
+        "qtdBaias": 10
     }
 ]

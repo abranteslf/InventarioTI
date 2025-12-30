@@ -1,7 +1,6 @@
 Esse projeto está sendo desenvolvido como treinamento da sintaxe do PHP.
 
-O objetivo é criar um sistema que gerencia o hardware de uma empresa, 
-garantindo que você saiba onde cada equipamento está e qual seu estado de conservação.
+O objetivo é criar um sistema que gerencia o hardware de uma empresa, garantindo que você saiba onde cada equipamento está e qual seu estado de conservação.
 
 O projeto simula o controle de ativos de uma empresa (notebooks, servidores), lidando com estados e herança.
 

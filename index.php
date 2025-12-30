@@ -114,6 +114,7 @@ function alterarStatusEquipamento() {
 
 function cadastrarEquipamento() {
     global $equipamentos;
+    // tipo
     do {
         echo "Escolha o tipo de equipamento a ser cadastrado:\n";
         foreach (Equipamento::TIPO_OPCOES as $index => $tipo) {
@@ -126,6 +127,87 @@ function cadastrarEquipamento() {
             echo "Opção inválida. Por favor, digite um número entre 1 e " . count(Equipamento::TIPO_OPCOES) . ".\n";
         }
     } while ($op < 1 || $op > count(Equipamento::TIPO_OPCOES));
+    $tipo = Equipamento::TIPO_OPCOES[$op - 1];
+
+    // marca e modelo
+    do {
+        echo "Digite a marca do equipamento: ";
+        $marca = trim(fgets(STDIN));
+        if (empty($marca)) {
+            echo "A marca não pode ser vazia. Por favor, digite uma marca válida.\n";
+        }   
+    } while (empty($marca));
+    
+    do {
+        echo "Digite o modelo do equipamento: ";
+        $modelo = trim(fgets(STDIN));
+        if (empty($modelo)) {
+            echo "O modelo não pode ser vazio. Por favor, digite um modelo válido.\n";
+        }
+    } while (empty($modelo));
+
+    // status
+    echo "Escolha o status do equipamento: \n";
+    foreach (Equipamento::STATUS_OPCOES as $index => $status) {
+        echo ($index + 1) . ". $status\n";
+    }
+    do {
+        echo "Digite o número correspondente ao status do equipamento: ";
+        $op = trim(fgets(STDIN));
+        $op = intval($op);
+        if ($op < 1 || $op > count(Equipamento::STATUS_OPCOES)) {
+            echo "Opção inválida. Por favor, digite um número entre 1 e " . count(Equipamento::STATUS_OPCOES) . ".\n";
+        }
+    } while ($op < 1 || $op > count(Equipamento::STATUS_OPCOES));
+    $status = Equipamento::STATUS_OPCOES[$op - 1];
+
+    // tipos
+    // === ID logic refatorado! ===
+    if (empty($equipamentos)) {
+        $id = 1;
+    } else {
+        $id = max(array_keys($equipamentos)) + 1;
+    }
+
+    if ($tipo == "Notebook") {
+        echo "Digite o processador do notebook: ";
+        $processador = trim(fgets(STDIN));
+
+        do {
+            echo "Digite a RAM do notebook (em GB): ";
+            $ram = trim(fgets(STDIN));
+            if (!is_numeric($ram) || intval($ram) < 1) {
+                echo "Informe um valor numérico válido para a RAM (maior que 0).\n";
+            }
+        } while (!is_numeric($ram) || intval($ram) < 1);
+
+        $equip = new Notebook($id, $marca, $modelo, $status, $processador, intval($ram));
+        $equipamentos[$equip->getId()] = $equip;
+        salvarEquipamentosJson($equipamentos);
+        echo "Equipamento cadastrado com sucesso.\n";
+    } elseif ($tipo == "Servidor") {
+
+        do {
+            echo "Digite a capacidade de storage do servidor (em TB): ";
+            $capacidadeStorageTB = trim(fgets(STDIN));
+            if (!is_numeric($capacidadeStorageTB) || floatval($capacidadeStorageTB) <= 0) {
+                echo "Informe um valor numérico válido para a capacidade de storage (maior que 0).\n";
+            }
+        } while (!is_numeric($capacidadeStorageTB) || floatval($capacidadeStorageTB) <= 0);
+
+        do {
+            echo "Digite a quantidade de baias do servidor: ";
+            $qtdBaias = trim(fgets(STDIN));
+            if (!is_numeric($qtdBaias) || intval($qtdBaias) < 1) {
+                echo "Informe um valor numérico válido para a quantidade de baias (maior que 0).\n";
+            }
+        } while (!is_numeric($qtdBaias) || intval($qtdBaias) < 1);
+
+        $equip = new Servidor($id, $marca, $modelo, $status, floatval($capacidadeStorageTB), intval($qtdBaias));
+        $equipamentos[$equip->getId()] = $equip;
+        salvarEquipamentosJson($equipamentos);
+        echo "Equipamento cadastrado com sucesso.\n";
+    }
 }
 
 
