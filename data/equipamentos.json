@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "tipo": "Notebook",
+        "marca": "Dell",
+        "modelo": "Inspiron 15",
+        "status": "Disponivel",
+        "processador": "Intel Core i5",
+        "ram": 8
+    },
+    {
+        "id": 2,
+        "tipo": "Servidor",
+        "marca": "Dell",
+        "modelo": "PowerEdge R740",
+        "status": "Disponivel",
+        "capacidadeStorageTB": 1,
+        "qtdBaias": 4
+    }
+]
