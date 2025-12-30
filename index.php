@@ -4,25 +4,6 @@ require_once "src/Equipamento.php";
 require_once "src/Notebook.php";
 require_once "src/Servidor.php";
 
-// Código original usando array indexada:
-// $equipsJson = json_decode(file_get_contents("data/equipamentos.json"), true);
-// $equipamentos = [];
-// foreach ($equipsJson as $equip) {
-//     switch ($equip["tipo"]) {
-//         case "Notebook":
-//             $notebook = new Notebook($equip["id"], $equip["marca"], $equip["modelo"], $equip["status"], 
-//             $equip["processador"], $equip["ram"]);
-//             $equipamentos[] = $notebook;
-//             break;
-//         case "Servidor":
-//             $servidor = new Servidor($equip["id"], $equip["marca"], $equip["modelo"], $equip["status"], 
-//             $equip["capacidadeStorageTB"], $equip["qtdBaias"]);
-//             $equipamentos[] = $servidor;
-//             break;
-//     }
-// }
-
-// Reescrito para usar array associativa (usando o ID como chave):
 $equipsJson = json_decode(file_get_contents("data/equipamentos.json"), true);
 $equipamentos = [];
 foreach ($equipsJson as $equip) {
